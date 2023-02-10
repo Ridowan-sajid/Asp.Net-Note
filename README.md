@@ -95,7 +95,7 @@ It will generate a box where**
 
 **We can receive data at backend from < input /> 4 ways:**
 
-* HttpRequesBase class -> **can be used in any web app**
+* HttpRequestBase class -> **can be used in any web app**
 * FormCollection ->**Can only be used in MVC**
 * Variable name Mapping -> **can be used in any web app**
 * Model Binding -> **can be used in any web app**
