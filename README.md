@@ -151,4 +151,30 @@ It will generate a box where**
 
 **Will automatically grab Uname and Pass from html form.**
 
+## Model Binding
+
+**Form.html**
+
+       < input name="Uname" />
+       < input name="Pass" />
+
+**FormController.cs**
+
+        public ActionResult Index(Login loging)
+        {
+            return View(loging);
+        }
+
+**In model we grab all the data as an array in loging, where Login is a registration model. After passing the loggin through View(). We can use those data in cshtml file the way given below**
+
+       
+       <h3>@Model.Uname</h3>
+       <h3>@Model.Pass</h3>
+
+
+
+
+
+
+
 
