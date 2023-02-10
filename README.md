@@ -29,6 +29,17 @@
         
 **Action will return a View. In views we need to create our own cshtml(html like) webpage. Every Action has their own view. That means When an action being called it will return an web page through view() from Views.**
 
+**We can also sent something to views, to show in webpage by storing in a variable and then call the variable from the web page**
+
+       public ActionResult Index()
+        {
+            ViewBag.name = "User";
+            ViewBag.course = "Asp.Net";
+            return View();
+        }
+
+**ViewBag.name and course can be used from index.cshtml webpage which is down below**
+
 ## Views
 
 **Views->Home(which is a controller name)->index.cshtml**
@@ -38,6 +49,9 @@
     }
 
     <h2>Login</h2>
+    <h4>Name @ViewBag.name</h4>
+     <h4>Name @ViewBag.course</h4>
+
 
     <form method="post">
         <input type="text" class="form-control" name="Uname" placeholder="Username" />
@@ -57,14 +71,16 @@ It will generate a box where**
 
 **Note: To create or see layout there is a folder called Shared which has all the layout. We can also create layout here.** 
 
-**Some answers:**
+## Some answers:
 
 * View Engine: It helps to run multiple language inside html(example: cshtml file)
 * View Engine Razor: It helps to run c# syntax in html (vise versa). **To write c# we have to add an @ sign before c# syntax. Example(@if(){})**
 * Layout: Common page for all web page. (example: Navbar)
 * To redirect another action : **return RedirectToAction("Index","Home");** "Index": Action name, "Home": Controller name
 * To redirect another website link: **return RedirectToAction("https://www.aiub.edu");**
-* To create a link: < a href="/Logged/Home" class="btn btn-primary" >Login</ a > **logged = controller; Home = view name;**
+* To create a link: **< a href="/Logged/Home" class="btn btn-primary" >Login</ a >; logged = controller; Home = view name;**
+
+
 
 
 
