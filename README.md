@@ -16,8 +16,11 @@
 # How Asp web app work?
 
 **Everytime App will start from controller. First we need to create our controller(name extension: nameController). Inside controller we need to create action which is ultimately a function.**
+**Suppose our controller Name is HomeController.cs**
 
 ## Action
+
+**HomeController.cs**
 
        public ActionResult Index()
         {
