@@ -17,7 +17,7 @@
 
 **Everytime App will start from controller. In controller we need to create action which is function.**
 
-**Action**
+## Action
 
        public ActionResult Index()
         {
@@ -25,6 +25,8 @@
         }
         
 **Action will return a View. In views we need to create our own cshtml(html like) webpage. Every Action has their own view. That means When we an action being called it will return an web page through view() from Views.**
+
+## Views
 
 **Views->Home(which is a controller name)->**
     
@@ -51,6 +53,12 @@ It will generate a box where**
 * Options: In option there is a check box named **Use a layout page** where we can set our own layout page. otherwise it will choose the default one. If we don't want any layout just unchecked the check box.
 
 **Note: To create or see layout there is a folder called Shared which has all the layout. We can also create layout here.** 
+
+**Some answers:**
+
+* View Engine: It helps to run multiple language inside html(example: cshtml file)
+* View Engine Razor: It helps to run c# syntax in html (vise versa). **To write c# we have to add an @ sign before c# syntax. Example(@if(){})**
+* Layout: Common page for all web page. (example: Navbar)
 
 
 
