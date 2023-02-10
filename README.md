@@ -28,7 +28,7 @@
 
 ## Views
 
-**Views->Home(which is a controller name)->**
+**Views->Home(which is a controller name)->index.cshtml**
     
     @{
         ViewBag.Title = "Index";
