@@ -64,8 +64,7 @@ It will generate a box where**
 * Layout: Common page for all web page. (example: Navbar)
 * To redirect another action : **return RedirectToAction("Index","Home");** "Index": Action name, "Home": Controller name
 * To redirect another website link: **return RedirectToAction("https://www.aiub.edu");**
-
-
+* To create a link: < a href="/Logged/Home" class="btn btn-primary" >Login</ a > **logged = controller; Home = view name;**
 
 
 
