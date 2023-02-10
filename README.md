@@ -41,7 +41,7 @@
     </form>
 
 
-**We can create views in short cut way thorugh action:**
+**We can create views in short cut way thrugh action:**
 
 **In Action right click on view() function -> Add view -> MVC 5 View -> 
 It will generate a box where** 
