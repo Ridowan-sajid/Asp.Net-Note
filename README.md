@@ -24,7 +24,7 @@
             return View();
         }
         
-**Action will return a View. In views we need to create our own cshtml(html like) webpage. Every Action has their own view. That means When we an action being called it will return an web page through view() from Views.**
+**Action will return a View. In views we need to create our own cshtml(html like) webpage. Every Action has their own view. That means When an action being called it will return an web page through view() from Views.**
 
 ## Views
 
@@ -43,7 +43,7 @@
     </form>
 
 
-**We can create views in short cut way thrugh action:**
+**We can create views in short cut way through action:**
 
 **In Action right click on view() function -> Add view -> MVC 5 View -> 
 It will generate a box where** 
