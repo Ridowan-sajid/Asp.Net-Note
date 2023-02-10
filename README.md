@@ -15,7 +15,7 @@
 
 # How Asp web app work?
 
-**Everytime App will start from controller. In controller we need to create action which is function.**
+**Everytime App will start from controller. First we need to create our controller(name extension: nameController). Inside controller we need to create action which is ultimately a function.**
 
 ## Action
 
