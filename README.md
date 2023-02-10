@@ -50,7 +50,7 @@ It will generate a box where**
 * Template: For now don't need to hyped with Template ->
 * Options: In option there is a check box named **Use a layout page** where we can set our own layout page. otherwise it will choose the default one. If we don't want any layout just unchecked the check box.
 
-
+**Note: To create or see layout there is a folder called Shared which has all the layout. We can also create layout here.** 
 
 
 
