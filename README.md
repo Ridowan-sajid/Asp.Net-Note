@@ -81,6 +81,25 @@ It will generate a box where**
 * To create a link: **< a href="/Logged/Home" class="btn btn-primary" >Login</ a >; logged = controller; Home = view name;**
 
 
+# Form Submission
+
+**Method:**
+
+* Get -> data passed via url.
+* Post -> data passed to direct requested body
+
+**Action**
+
+* After submitting form, in which page we want to go; we can set our desired web page.
+* We set action page same as form page to show validation message
+
+**We can receive data at backend from < input /> 4 ways:**
+
+* HttpRequesBase class -> **can be used in any web app**
+* FormCollection ->**Can only be used in MVC**
+* Variable name Mapping -> **can be used in any web app**
+* Model Binding -> **can be used in any web app**
+
 
 
 
