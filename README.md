@@ -62,7 +62,8 @@ It will generate a box where**
 * View Engine: It helps to run multiple language inside html(example: cshtml file)
 * View Engine Razor: It helps to run c# syntax in html (vise versa). **To write c# we have to add an @ sign before c# syntax. Example(@if(){})**
 * Layout: Common page for all web page. (example: Navbar)
-* To redirect from one : **return RedirectToAction("Index","Home");** "Index": Action name, "Home": Controller name
+* To redirect another action : **return RedirectToAction("Index","Home");** "Index": Action name, "Home": Controller name
+* To redirect another website link: **return RedirectToAction("https://www.aiub.edu");**
 
 
 
