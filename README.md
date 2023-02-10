@@ -101,7 +101,54 @@ It will generate a box where**
 * Model Binding -> **can be used in any web app**
 
 
+## HttpRequestBase class
 
+**Form.html**
 
+       < input name="Uname" />
+       < input name="Pass" />
+
+**FormController.cs**
+
+       public ActionResult Index()
+        {
+            ViewBag.Name = Request["Uname"];
+            ViewBag.Password = Request["Pass"];
+            return View();
+        }
+        
+## FormCollection object
+
+**Form.html**
+
+       < input name="Uname" />
+       < input name="Pass" />
+
+**FormController.cs**
+
+       public ActionResult Index(FormCollection form)
+        {
+            ViewBag.Name = form["Uname"];
+            ViewBag.Password = form["Pass"];
+            return View();
+        }
+        
+## Variable Name Maping
+
+**Form.html**
+
+       < input name="Uname" />
+       < input name="Pass" />
+
+**FormController.cs**
+
+       public ActionResult Index(String Uname, String Pass)
+        {
+            ViewBag.Name = Uname;
+            ViewBag.Password = Pass;
+            return View();
+        }
+
+**Will automatically grab Uname and Pass from html form.**
 
 
