@@ -173,6 +173,20 @@ It will generate a box where**
 
 
 
+# Annotation
+
+**It is a tag which represent a block of code.It must be used in upside of a action method. When we run the method, annotation will run first. If annotation return us true then only the method will run otherwise it won't.**
+
+**Example**
+
+        [HttpGet]
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+**If the index view has a from which post is method, then it will give us true. Then Index() method will run.**
+
 
 
 
