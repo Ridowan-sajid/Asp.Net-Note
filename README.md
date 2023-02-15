@@ -18,7 +18,7 @@
 **Everytime App will start from controller. First we need to create our controller(name extension: nameController). Inside controller we need to create action which is ultimately a function.**
 **Suppose our controller Name is HomeController.cs**
 
-## Action
+## Controller
 
 **HomeController.cs**
 
@@ -70,6 +70,34 @@ It will generate a box where**
 * Options: In option there is a check box named **Use a layout page** where we can set our own layout page. otherwise it will choose the default one. If we don't want any layout just unchecked the check box.
 
 **Note: To create or see layout there is a folder called Shared which has all the layout. We can also create layout here.** 
+
+
+## Model
+
+**Model is like a blueprint to create Object. Example: We have a Register class which has some field(name,age,password,gender). Then we can create some object which data are being taken through the registration form. With those data we can create Register Object. We can create as many object as we want through that form.**
+
+**We create model inside Model folder**
+
+**Example of a Model**
+
+**Login.cs**
+
+       using System;
+       using System.Collections.Generic;
+       using System.Linq;
+       using System.Web;
+
+       namespace FormSubmission.Models
+       {
+           public class Login
+           {
+               public string Uname { get; set; }
+               public string Pass { get; set; }
+           }
+       }
+
+
+
 
 ## Some answers:
 
