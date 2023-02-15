@@ -257,6 +257,20 @@ It will generate a box where**
 * Can convert to List, array, single instance
 * General syntax: From **item** in **collection** where **condition** set item
 
+**ORM**
+
+* Object Relational Mapping
+* Provides the quality to work with db in OO ways
+
+**Entity Framework**
+
+* ORM for .Net
+* DB first -> use on existing project (:
+* CODE first -> with code (:
+* UML first -> rarely used
+
+
+
 
 
 
