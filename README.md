@@ -246,3 +246,27 @@ It will generate a box where**
         }
 
 **To know more: https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-7.0**
+
+
+# Database Connection
+
+**LINQ**
+
+* Provide the feature of query like syntax in c#
+* Can be applied to any collection that implements Ienumerable interface(ex. List, Array)
+* Can convert to List, array, single instance
+* General syntax: From **item** in **collection** where **condition** set item
+
+
+
+
+
+
+
+
+
+
+
+
+
+
