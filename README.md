@@ -13,12 +13,18 @@
 | ----------- | ----------- |
 | ![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/2.png) | * In **App Start** We have **RouterConfig.cs** where we set the router means after starting the app from where it will start. * In **Content** devs put all the bootstrap required to run bootstrap * In **Controllers** we create controller for our web page * In **fonts** devs put all the fonts. * In **Models** we can create model to create object based on that model. * In **Scripts** devs put all the javascript file which is required. * After creating controller we need to create view based on that controller in **Views** folder.   |
 
+**It follow the MVC structure**
+
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/mvc.png)
+
+
 # How Asp web app work?
+
+## Controller
 
 **Everytime App will start from controller. First we need to create our controller(name extension: nameController). Inside controller we need to create action which is ultimately a function.**
 **Suppose our controller Name is HomeController.cs**
 
-## Controller
 
 **HomeController.cs**
 
