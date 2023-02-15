@@ -185,10 +185,26 @@ It will generate a box where**
             return View();
         }
 
-**If the index view has a from which post is method, then it will give us true. Then Index() method will run.**
+**If the index view has a from which method is post, then it will give us true. Then Index() method will run.**
 
+# Form Validation
 
+**In Models =>**
 
+     public class Register
+       {
+        [Required]
+        [StringLength(10,ErrorMessage ="Name should not exceed 10 chars")]
+        public string Name { get; set; }
+        [Required(ErrorMessage ="Please provide id")]
+        public string Id { get; set; }
+       }
 
-
-
+**In Controllers**
+        
+        public ActionResult Index(Register model) {
+            if (ModelState.IsValid) { 
+                return RedirectToAction("Index","Home");
+            }
+            return View(model); 
+        }
