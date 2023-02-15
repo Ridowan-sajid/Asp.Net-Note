@@ -208,3 +208,5 @@ It will generate a box where**
             }
             return View(model); 
         }
+
+**To know more: https://learn.microsoft.com/en-us/aspnet/core/mvc/models/validation?view=aspnetcore-7.0**
