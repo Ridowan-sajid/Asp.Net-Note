@@ -74,13 +74,13 @@ It will generate a box where**
 
 ## Model
 
-**Model is like a blueprint to create Object. Example: We have a Register class which has some field(name,age,password,gender). Then we can create some object which data are being taken through the registration form. With those data we can create Register Object. We can create as many object as we want through that form.**
+**Model is like a blueprint to create Object. Example: We have a Customer class which has some field(name,age,password,gender). Then we can create some object which data are being taken through the Registration form. With those data we can create Customer Object. We can create as many object as we want through that form.**
 
 **We create model inside Model folder**
 
 **Example of a Model**
 
-**Login.cs**
+**Customer.cs**
 
        using System;
        using System.Collections.Generic;
@@ -89,9 +89,11 @@ It will generate a box where**
 
        namespace FormSubmission.Models
        {
-           public class Login
+           public class Customer
            {
                public string Uname { get; set; }
+               public string age { get; set; }
+               public string gender { get; set; }
                public string Pass { get; set; }
            }
        }
