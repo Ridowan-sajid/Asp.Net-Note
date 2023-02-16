@@ -285,7 +285,7 @@ It will generate a box where**
 
 ![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Screenshot%20(360).png)
 
-**checked on just Tables -> Finish -> Lastly Ctrl+B (otherwise you will gonna cry).**
+**Ok -> checked on just Tables -> Finish -> Lastly Ctrl+B (otherwise you will gonna cry).**
 
 
 
