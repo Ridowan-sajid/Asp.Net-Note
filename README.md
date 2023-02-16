@@ -80,7 +80,7 @@ It will generate a box where**
 
 ## Model
 
-**Model is like a blueprint to create Object. Example: We have a Customer class which has some field(name,age,password,gender). Then we can create some object which data are being taken through the Registration form. With those data we can create Customer Object. We can create as many object as we want through that form.**
+**Model is like a blueprint to create Object. Example: We have a Customer class(Model) which has some field(name,age,password,gender). Then we can create some object which data are being taken through the Registration form. With those data we can create Customer Object. We can create as many object as we want through that form.**
 
 **We create model inside Model folder**
 
