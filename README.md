@@ -271,7 +271,21 @@ It will generate a box where**
 
 ## Create connection with ms sql server
 
-Create a folder/or we can choose Model folder(though it will create a mess like me) - > right click on that foler -> Add -> New item -> Data -> ADO.net entity data model -> Add -> EF designer from database -> New connection -> checked on Tables -> Finish -> Lastly Ctrl+B (otherwise you will gonna cry). 
+**First we have to choose a database to be connected**
+
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Screenshot%20(359).png)
+
+**Suppose we choose ECommerce Database to connect**
+
+**Create a folder/or we can choose Model folder(though it will create a mess like me) - > right click on that foler -> Add -> New item -> Follow the screen shot given below**
+
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Screenshot%20(361).png)
+
+**Add -> EF designer from database -> New connection -> Follow the screen shot given below**
+
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Screenshot%20(360).png)
+
+**checked on just Tables -> Finish -> Lastly Ctrl+B (otherwise you will gonna cry).**
 
 
 
