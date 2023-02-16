@@ -317,7 +317,7 @@ It will generate a box where**
             return RedirectToAction("CutomerList");
         }
         
-**First Register action will run and show us the form. After getting submit with post method second register action will run. Second Register will take customer info through form to create a customer object. At first we just create an object of our Entities. Then next line we add our customer object inside database based on Customer table. Note Every time after doing anything with database run db.SaveChanges(). Otherwise it won't reflect on database. Then we just redirect to CustomerList Action.**
+**First Register action will run and show us the form. After getting submit with post method second register action will run. Second Register will take customer info through form to create a customer object. At first we just create an object of our Entities. Then next line we add our customer object inside database based on Customer table. Note Every time after doing anything with database run db.SaveChanges(). Otherwise it won't reflect on database. Then we just redirect to CustomerList Action which print all the customer list.**
 
 **Register.cshtml**
 
