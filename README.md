@@ -261,6 +261,9 @@ It will generate a box where**
 * Can be applied to any collection that implements Ienumerable interface(ex. List, Array)
 * Can convert to List, array, single instance
 * General syntax: From **item** in **collection** where **condition** set item
+* syntax better example: **from s in db.Customers
+                      where s.id == id
+                      select s**
 
 **ORM**
 
@@ -339,6 +342,95 @@ It will generate a box where**
            <input name="password" type="text" placeholder="password" />
            <input name="submit" type="submit" value="Register"/>
        </form>
+
+## Read
+
+**Inside CustomerController.cs**
+
+        public ActionResult CutomerList()
+        {
+            var db = new ECommerceEntities1();
+            var customerLi = db.Customers.ToList();
+            return View(customerLi);
+        }
+
+**We first create an object of database. Then grab all the customer list from database as List. After that we sent that Customer List through view as Model.**
+
+**CustomerList.cshtml**
+
+       @model IEnumerable<Ecommerce.ECM.Customer>
+       @{
+           ViewBag.Title = "CutomerList";
+       }
+
+
+       <h2>List</h2>
+
+       <table class="table">
+           <tr>
+               <th>
+                   Id
+               </th>
+               <th>
+                   Phone
+               </th>
+               <th>
+                   Name
+               </th>
+               <th>
+                   Password
+               </th>
+               <th>
+                   Edit
+               </th>
+               <th>
+                   Delete
+               </th>
+           </tr>
+
+
+
+           @foreach (var item in Model)
+           {
+       <tr>
+           <td>
+               @item.id
+           </td>
+           <td>
+               @item.name
+           </td>
+           <td>
+               @item.phone
+           </td>
+           <td>
+               @item.password
+           </td>
+           <td>
+               <a href="/Customer/Edit/@item.id">Edit</a>
+           </td>
+           <td>
+               <a href="/Customer/Delete/@item.id">Delete</a>
+           </td>
+       </tr>
+           }
+
+
+       </table>
+
+**@model IEnumerable<Ecommerce.ECM.Customer> this line is for to collect all the data from CustomerList view which is sent through "return View(customerLi);"**
+       
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
