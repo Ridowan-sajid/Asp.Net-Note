@@ -269,7 +269,9 @@ It will generate a box where**
 * CODE first -> with code (:
 * UML first -> rarely used
 
+## Create connection with ms sql server
 
+Create a folder/or we can choose Model folder(though it will create a mess like me) - > right click on that foler -> Add -> New item -> Data -> ADO.net entity data model -> Add -> EF designer from database -> New connection -> checked on Tables -> Finish -> Lastly Ctrl+B (otherwise you will gonna cry). 
 
 
 
