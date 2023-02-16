@@ -297,6 +297,11 @@ It will generate a box where**
 
 # CRUD
 
+**To do crud operation we need to create object of Entity framework. To know that Entity framework name to create object, just follow the given below screen shot**
+
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Screenshot%20(362).png)
+
+
 ## Create
 
 
