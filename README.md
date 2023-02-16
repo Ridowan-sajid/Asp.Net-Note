@@ -23,6 +23,11 @@
 ## Controller
 
 **Everytime App will start from controller. First we need to create our controller(name extension: nameController). Inside controller we need to create action which is ultimately a function.**
+
+**To create Controller:**
+
+* Choose Controller folder -> right click -> Add -> Controller -> MVC 5 Controller Empty/other two can be choosed for ur own satisfaction -> Give a name(not ur name) -> Add
+
 **Suppose our controller Name is HomeController.cs**
 
 
