@@ -295,6 +295,47 @@ It will generate a box where**
 **Even after this if you won't understand anything, Then Die. Just kidding. Follow the Link: https://www.youtube.com/watch?v=qSQy1c-XWPg&list=PPSV**
 
 
+# CRUD
+
+## Create
+
+
+**Inside CustomerController.cs**
+
+        [HttpGet]
+        public ActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Register(Customer customer)
+        {
+            var db = new ECommerceEntities1();
+            db.Customers.Add(customer);
+            db.SaveChanges();
+
+            return RedirectToAction("CutomerList");
+        }
+        
+**First Register action will run and show us the form. After getting submit with post method second register action will run. Second Register will take customer info through form to create a customer object. In 313 line we just create an object of our Entities. Then next line we add our customer object into database on Customer table. Note Every time after doing anything with database run db.SaveChanges(). Otherwise it won't reflect on database. Then we just redirect to CustomerList Action.**
+
+**Register.cshtml**
+
+       
+       @{
+           ViewBag.Title = "Register";
+       }
+
+       <h2>Register</h2>
+       <form method="post">
+           <input name="id" type="number" placeholder="id" />
+           <input name="phone" type="text" placeholder="phone" />
+           <input name="name" type="text" placeholder="name" />
+           <input name="password" type="text" placeholder="password" />
+           <input name="submit" type="submit" value="Register"/>
+       </form>
+
+
 
 
 
