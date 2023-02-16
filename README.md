@@ -287,7 +287,7 @@ It will generate a box where**
 
 **Ok -> checked on just Tables -> Finish -> Lastly Ctrl+B (otherwise you will gonna cry).**
 
-**Even after reading if you won't understand anything, Then Die. Just kidding. Follow the Link: https://www.youtube.com/watch?v=qSQy1c-XWPg&list=PPSV**
+**Even after this if you won't understand anything, Then Die. Just kidding. Follow the Link: https://www.youtube.com/watch?v=qSQy1c-XWPg&list=PPSV**
 
 
 
