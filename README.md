@@ -417,9 +417,60 @@ It will generate a box where**
 
        </table>
 
-**@model IEnumerable<Ecommerce.ECM.Customer> this line is for to collect all the data from CustomerList view which is sent through "return View(customerLi);"**
-       
+**@model IEnumerable<Ecommerce.ECM.Customer> this line is for to collect all the data from CustomerList view which is sent through "return View(customerLi);". So why we are doing it because we didn't do that earlier. We did it because before we got only one object but this time we are a getting a list.**
 
+* Ecommerce = Project name
+* ECM = folder name where we created connection with db
+* Customer = Class name
+
+## Update
+
+**Inside CustomerController.cs**
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var db = new ECommerceEntities1();
+            var st = (from s in db.Customers
+                      where s.id == id
+                      select s).SingleOrDefault();
+            return View(st);
+        }
+        [HttpPost]
+        public ActionResult Edit(Customer upstudent)
+        {
+            var db = new ECommerceEntities1();
+            var exst = (from s in db.Customers
+                        where s.id == upstudent.id
+                        select s).SingleOrDefault();
+            exst.phone = upstudent.phone;
+            exst.name = upstudent.name;
+            exst.password = upstudent.password;
+
+            //db.Entry(exst).CurrentValues.SetValues(upstudent);
+            db.SaveChanges();
+
+            return RedirectToAction("CutomerList");
+        }
+        
+        
+**Work like "create" in first Edit action will take a user which sent by us. Next it will create a query to search that user from our database. SingleOrDefault() function used which will sent a user object because we won't get any list we will get one object only because id is unique. After that we just sent that object info to Edit view so that we can see it from front end.**
+
+**After submitting with edited info second Edit action will run. This time we took all the info as "upstudent" which is sent through form. Next we just update all the info manually, we can do it easily by run this "db.Entry(exst).CurrentValues.SetValues(upstudent);"**
+
+**Edit.cshtml**
+
+       @{
+           ViewBag.Title = "Edit";
+       }
+
+       <h2>Edit</h2>
+       <form method="post">
+           <input name="name" type="text" value="@Model.name" placeholder="name" />
+           <input name="phone" type="text" value="@Model.phone" placeholder="phone" />
+           <input name="password" type="text" value="@Model.password" placeholder="password" />
+           <input name="submit" type="submit" value="Register" />
+       </form>
 
 
 
