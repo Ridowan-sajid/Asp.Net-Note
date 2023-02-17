@@ -454,7 +454,11 @@ It will generate a box where**
         }
         
         
-**Work like "create" in first Edit action will take a user which sent by us. Next it will create a query to search that user from our database. SingleOrDefault() function used which will sent a user object because we won't get any list we will get one object only because id is unique. After that we just sent that object info to Edit view so that we can see it from front end.**
+**Work like "create", in first Edit action it will take a user id which sent by us. How we sent?**
+
+**< a href="/Customer/Edit/@item.id" >Edit</ a > .**
+
+**Next it will create a query to search that user from our database. SingleOrDefault() function used which will sent a user object because we won't get any list we will get one object only because id is unique. After that we just sent that object info to Edit view so that we can see it from front end.**
 
 **After submitting with edited info second Edit action will run. This time we took all the info as "upstudent" which is sent through form. Next we just update all the info manually, we can do it easily by run this "db.Entry(exst).CurrentValues.SetValues(upstudent);"**
 
@@ -474,8 +478,29 @@ It will generate a box where**
 
 
 
+## Delete
 
+**Inside CustomerController.cs**
 
+       public ActionResult Delete(int id)
+        {
+            var db = new ECommerceEntities1();
+            var exst = (from s in db.Customers
+                        where s.id == id
+                        select s).SingleOrDefault();
+            db.Customers.Remove(exst);
+            db.SaveChanges();
+
+            return RedirectToAction("CutomerList");
+        }
+        
+**This time delete action will just take an id which was sent by us.**
+**How did we sent?**
+**< a href="/Customer/Delete/@item.id">Delete</ a >**
+
+**Then it will search that object by using that id. After that it will remove that customer object from database.**
+
+**There is no Delete views because we just deleting the customer object, we are not showing the customer anything. Though we can show the customer a pop up like "Do you really want to delete?"**
 
 
 
