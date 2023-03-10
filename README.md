@@ -417,7 +417,7 @@ It will generate a box where**
 
        </table>
 
-**@model IEnumerable<Ecommerce.ECM.Customer> this line is for to collect all the data from CustomerList view which is sent through "return View(customerLi);". So why we are doing it because we didn't do that earlier. We did it because before we got only one object but this time we are a getting a list.**
+**@model IEnumerable<Ecommerce.ECM.Customer> this line is for to collect all the data from CustomerList view which is sent through "return View(customerLi);". So why we are doing it because we may pass any types of Model we want but in this time we only want Customer model. Except Customer others model won't gonna be accepted**
 
 * Ecommerce = Project name
 * ECM = folder name where we created connection with db
