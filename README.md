@@ -505,9 +505,39 @@ It will generate a box where**
 
 
 
+# Database Design
 
+**First We need to designing a database with their corresponding relationship**
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Database.jpg)
 
+**Then, we have to create table with index column**
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Design%20Database.png)
 
+**After that we need to implement those design in our database server**
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Catagory%20.png)
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Customer.png)
+
+**Order table is connected with Customer table with Many(Order) To One(Customer) relationship. We choose to set a foreign key in Order table of Customer table. Because Order table is Many and Customer is One. We have to remember one thing that is when we see a Many to One or One to Many, we will just go to Many table then create a foreign key of One table. Whole Process is given below how to do this.**
+
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Order-1.png)
+
+**Need to click "Add" to add**
+
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Order-2.png)
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Order-3.png)
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Order-4.png)
+
+**Create Just a Product table**
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Product-1.png)
+
+**Product and Order table are connected with Many to Many Relationship. But we won't gonna able to create Many to Many relationship in sql. So, to solve this issue we need to create a middle table which will gonna connected with both Product and Order table. For this example, we named this middle table is ProductOrder. We will set ProductOrder as Many and other both table(Product and Order) will be set as One position. So our relation would be like this:**
+
+       Product(One) -- ProductOrder(Many) -- Order(One)
+       
+**Now we know how to create One to Many relationship in database**
+
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/ProductOrder-2.png)
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/ProductOrder-1.png)
 
 
 
