@@ -297,6 +297,24 @@ It will generate a box where**
 
 **Even after this if you won't understand anything, Then Die. Just kidding. Follow the Link: https://www.youtube.com/watch?v=qSQy1c-XWPg&list=PPSV**
 
+## After Update Database
+
+**After update any table in database, We need to refresh in asp.net connection.**
+
+**To refresh:**
+
+**First we need to go Model1.edmx(name maybe varies, just concerned on edmx extension) file which contain whole design of our database.**
+**Next We need click right button then some option will appear (related ss has been given below)**
+
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/UpdateRefresh.png)
+
+**If we added any new table in our database, we just need to checked on "table" => then finish**
+
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/UpdateRefresh3.png)
+
+**If we just update any table in our db we just need to clicked on "table" then => then finish**
+
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/UpdateRefresh2.png)
 
 # CRUD
 
@@ -452,6 +470,9 @@ It will generate a box where**
 
             return RedirectToAction("CutomerList");
         }
+        
+        //Alternative to find from database
+        db.Customers.Find(id);
         
         
 **Work like "create", in first Edit action it will take a user id which sent by us. How we sent?**
