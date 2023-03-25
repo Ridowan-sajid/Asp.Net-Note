@@ -567,3 +567,86 @@ It will generate a box where**
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Code First approach(first we will code, based on that code we will create database).
+
+first need to download entity framework by going our project then click right button on whole project file name => click manage nugget packages=>search "Entityframework" => download it.
+
+Before we just used ADO connection string , but this time we will create our own connection string. which is need to done only for 1 time.
+=> in our peoject folder there is a file called Web.config => in this file scroll down in the below we will find </configuration> which means the ending of configuration. => We will create our string before the ending.=> create a tag connection string=> 
+<connectionStrings> </connectionStrings> => inside it create another tag called add=> on that add we will do our work like given below
+
+<connectionStrings> 
+<add name="PMSContext" connectionString="data source=FRAGILE; initial catalog=School; integrated security=true;" providerName="System.Data.Sqlclient"/>
+</connectionStrings>
+
+//name="" can be anything. 
+//data source= server name(my server name is fragile)
+//initial catalog= Database name which I will use in this project,if there is no database as School it will create it's own.
+//integrated security= To active windows authentication.
+//If votey kilai,,,userid="";password="";
+
+# Model and context modification:(context means database)
+
+=>Create a folder called EF under project.=> inside EF create another folder called Models.=>inside Models we will create table's model which we want to be created in database. => inside Models we have to create a cs file which name is based on context name.(name="PMSContext"). So, we will create a cs file called PMSContext.cs. this PMSContext class will inherit DbContext.
+
+public class PMSContext : DbContext{
+	public DbSet<Category> Categories { get; set; }
+}
+
+Inside PMSContext class we create a DbSet which will create a table on our database . In here, inside Models we created a model named Category. To create a table on Category we created a DbSet of Category inside PMSContext class. To reflect this code on databse, we need to do migration. Migration will convert this c# code into sql query and run those query in database. 
+
+=> To enable migration we have to use command line.=>tools=>Nuget package manager => package manager console:
+to enable=> enable-migrations
+if we changed or modify any model or context we need to run => add-migration msg 
+(msg is like a github a commit message).
+to update database=> update-database -Verbose 
+(if we use -Verbose it will show us query, otherwise it will hide all those query)
+
+
+=>AFter run everything in our microsoft sql server a database named School will be created. On that database a Category table will be created , beside that table another table named dbo._MigrationHistory will be created which is created by default to track all table creation, modification etc. 
+
+=> In model if we create a variable called id and type int, database will make this id as primary key, and auto increment. It is a default behaviour. 
+
+
+=> In model if there is a relation of one to one, one to many, vise versa, we may required to create a collection of other table/model, If we create collection then we need to create a constructor where we required to create an object of that collection table/model.
+
+=> We can create random data on our database by writing code inside Seed() which is in Configuration.cs file, which is in Migrations Folder.
+
+1:04:33
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
