@@ -563,30 +563,9 @@ It will generate a box where**
 
 
 
+# Code First approach
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# Code First approach(first we will code, based on that code we will create database).
+**(first we will code, based on that code we will create database).**
 
 **First need to download entity framework by going our project then click right button on whole project file name**
 * **click manage nugget packages**
@@ -601,7 +580,7 @@ It will generate a box where**
 * **Inside it create another tag called add, on that add we will do our work like given below**
 
 **< connectionStrings > 
-< add name="PMSContext" connectionString="data source=FRAGILE; initial catalog=School; integrated security=true;" providerName="System.Data.Sqlclient"/>
+< add name="PMSContext" connectionString="data source=FRAGILE; initial catalog=ECommerce; integrated security=true;" providerName="System.Data.Sqlclient"/>
 </ connectionStrings >**
 
 * **name="" can be anything.** 
@@ -610,27 +589,185 @@ It will generate a box where**
 * **integrated security= To active windows authentication.**
 * **If votey kilai,,,userid="";password="";**
 
-//image1
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/CodeFirst1.png)
 
 
 ## Model and context modification:(context means database)
+
+**Design:**
+
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Design.png)
+
+**Based on that design we will create our database**
+
+**Step:**
 
 * **Create a folder called EF under our project**
 * **inside EF create another folder called Models**
 * **inside Models we will create table's model which we want to be created in our database**
 * **inside Models or inside EF foleder(preferable) we have to create a cs file which name is based on context name.(name="PMSContext", from < connectionStrings />). So, we will create a cs file called PMSContext.cs. this PMSContext class will inherit DbContext.**
 
-public class PMSContext : DbContext{
-	public DbSet<Category> Categories { get; set; }
-}
-	
-//image2
+**PMSContext.cs**
 
-***Inside PMSContext class we create a DbSet which will create a table on our database . In here, inside Models we created a model named Category. To create a table on Category we created a DbSet of Category inside PMSContext class. To reflect this code on databse, we need to do migration. Migration will convert this c# code into sql query and run those query in database. This way, we can create table based on our model in our database***
+	using System;
+	using System.Collections.Generic;
+	using System.Data.Entity;
+	using System.Linq;
+	using System.Web;
 
-**To enable migration we have to use command line => tools => Nuget package manager => package manager console**
+	namespace EFCodeFirst.EF.Models
+	{
+	    public class PMSContext : DbContext
+	    {
+		public DbSet<Category> Categories { get; set; }
+		public DbSet<Product> Products { get; set; }
+		public DbSet<Order> Orders { get; set; }
+		public DbSet<OrderDetail> OrderDetails { get; set; }
+		public DbSet<User> Users { get; set; }
+	    }
+	}
 	
-	//image3
+	
+**Category.cs**
+
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Web;
+
+	namespace EFCodeFirst.EF.Models
+	{
+	    public class Category
+	    {
+		public int Id { get; set; }
+		public string Name { get; set; }
+		public virtual ICollection<Product>Products { get; set; }
+		public Category() {
+		    Products = new List<Product>();
+		}
+
+	    }
+	}
+
+
+**Order.cs**
+
+	using System;
+	using System.Collections.Generic;
+	using System.ComponentModel.DataAnnotations.Schema;
+	using System.Linq;
+	using System.Web;
+
+	namespace EFCodeFirst.EF.Models
+	{
+	    public class Order
+	    {
+		public int Id { get; set; }
+		public DateTime OrderDate { get; set; }
+		public string Status { get; set; }
+		public int Amount { get; set; }
+		[ForeignKey("OrderedBy")]
+		public string OrderedById { get; set; }
+		public virtual User OrderedBy { get; set; }
+		public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+		public Order() {
+		    OrderDetails = new List<OrderDetail>();
+		}
+	    }
+	}
+
+**OrderDetail.cs**
+
+	using System;
+	using System.Collections.Generic;
+	using System.ComponentModel.DataAnnotations.Schema;
+	using System.Linq;
+	using System.Web;
+
+	namespace EFCodeFirst.EF.Models
+	{
+	    public class OrderDetail
+	    {
+		public int Id { get; set; }
+		public int Qty { get; set; }
+		public int Price { get; set; }
+		[ForeignKey("Product")]
+		public int PId { get; set; }
+		[ForeignKey("Order")]
+		public int OId { get; set; }
+		public virtual Product Product{ get; set; }
+		public virtual Order Order { get; set; }
+	    }
+	}
+
+
+**Product.cs**
+
+	using System;
+	using System.Collections.Generic;
+	using System.ComponentModel.DataAnnotations;
+	using System.ComponentModel.DataAnnotations.Schema;
+	using System.Linq;
+	using System.Web;
+
+	namespace EFCodeFirst.EF.Models
+	{
+	    public class Product
+	    {
+		[Key]
+		public int Id { get; set; }
+		[Required]
+		[StringLength(100)]
+		public string Name { get; set; }
+		public int? Price { get; set; }//to make nullable used int?
+		public int Qty { get; set; }
+		[ForeignKey("Category")]
+		public int CId { get; set; }
+		public virtual Category Category { get; set; }
+		public virtual ICollection<OrderDetail> OrderDetails { get; set; }
+		public Product()
+		{
+		    OrderDetails = new List<OrderDetail>();
+		}
+	    }
+	}
+
+**User.cs**
+
+	using System;
+	using System.Collections.Generic;
+	using System.ComponentModel.DataAnnotations;
+	using System.Linq;
+	using System.Web;
+
+	namespace EFCodeFirst.EF.Models
+	{
+	    public class User
+	    {
+		[Key]
+		[StringLength(10)]
+		public string Username { get; set; }
+		[Required]
+		[StringLength (100)]
+		public string Name { get; set; }
+		[Required,StringLength (10)]
+		public string Type { get; set; }
+		[Required]
+		public string Password { get; set; }
+		public virtual ICollection<Order> Orders { get; set; }
+		public User() {
+		    Orders = new List<Order>();
+		}
+
+	    }
+	}
+
+
+***Inside PMSContext class we create a DbSet which will create a table on our database . In here, inside Models we created a some model. To create table on those model on our database, we created DbSet of all Model inside PMSContext class. To reflect this code on databse, we need to do migration. Migration will convert this c# code into sql query and run those query in database. This way, we can create table based on our model in our database***
+
+**To enable migration we have to use command line => tools => Nuget package manager => package manager console => Write on: PM> here**
+	
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/CodeFirst3.png)
 	
 * **to enable=> enable-migrations**
 * **If we changed or modify any model or context we need to run => add-migration msg** 
@@ -644,12 +781,61 @@ public class PMSContext : DbContext{
 **In model if we create a variable called id and type int, database will make this id as primary key, and auto increment. It is a default behaviour. otherwise we can set as [Key].**
 
 
-=> In model if there is a relation of one to one, one to many, vise versa, we may required to create a collection of other table/model, If we create collection then we need to create a constructor where we required to create an object of that collection table/model.
+**In model if there is a relation of one to one, one to many, vise versa, we may required to create a collection of other table/model, If we create collection then we need to create a constructor where we required to create an object of that collection table/model.**
 
-=> We can create random data on our database by writing code inside Seed() which is in Configuration.cs file, which is in Migrations Folder.
+**We can create random data on our database by writing code inside Seed() which is in Configuration.cs file, which is in Migrations Folder.**
+**This Seed() method will run only one time, when we first run the project**
 
-1:04:33
+**Configuration.cs**
 
+	namespace EFCodeFirst.Migrations
+	{
+	    using System;
+	    using System.Data.Entity;
+	    using System.Data.Entity.Migrations;
+	    using System.Linq;
+
+	    internal sealed class Configuration : DbMigrationsConfiguration<EFCodeFirst.EF.Models.PMSContext>
+	    {
+		public Configuration()
+		{
+		    AutomaticMigrationsEnabled = false;
+		}
+
+		protected override void Seed(EFCodeFirst.EF.Models.PMSContext context)
+		{
+		    //  This method will be called after migrating to the latest version.
+
+		    //  You can use the DbSet<T>.AddOrUpdate() helper extension method
+		    //  to avoid creating duplicate seed data.
+
+
+		    for(int i = 0; i < 10; i++)
+		    {
+			context.Categories.AddOrUpdate(
+			    new EF.Models.Category() { 
+				Name=Guid.NewGuid().ToString().Substring(0,5), //6 string from 36 string
+			    }
+			    );
+		    }
+		    Random random = new Random();
+		    for (int i = 0; i < 1000; i++) {
+			context.Products.AddOrUpdate(
+
+				new EF.Models.Product() { 
+				    Name = Guid.NewGuid().ToString().Substring(0,17),
+				    Price = random.Next(100,501),
+				    Qty = random.Next(10,51),
+				    CId = random.Next(1,21)
+				}
+			    );
+		    }
+		}
+	    }
+	}
+
+
+**In here 10 category data will be created on our database. Next, 1000 Product will be created. If there is already created those data it won't gonna create again**
 
 
 
