@@ -585,7 +585,7 @@ It will generate a box where**
 
 * **name="" can be anything.** 
 * **data source= server name(my server name is fragile)**
-* **initial catalog= Database name which I will use in this project,if there is no database as School it will create it's own.**
+* **initial catalog= Database name which I will use in this project,if there is no database as ECommerce it will create it's own.**
 * **integrated security= To active windows authentication.**
 * **If votey kilai,,,userid="";password="";**
 
