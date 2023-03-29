@@ -8,6 +8,10 @@
 
 ![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/1.png)
 
+**Next**
+
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Basic1.png)
+
 # Structure of Asp.Net
 |  Image      | Description |
 | ----------- | ----------- |
@@ -965,6 +969,20 @@ It will generate a box where**
 
 **For creating API we need to do something extra stuff**
 
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/1.png)
+
+**Next**
+
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/APi1.png)
+
+**After starting the project, we can create database through Code First or Database First, any way we want.**
+
+**Then we need to create controller:**
+
+	Choose Controller folder -> right click -> Add -> Controller
+
+**Next follow the screen shot given below:**
 
 
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/APi2.png)
 
