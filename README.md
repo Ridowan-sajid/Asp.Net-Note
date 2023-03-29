@@ -986,3 +986,132 @@ It will generate a box where**
 
 ![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/APi2.png)
 
+
+## Inside Controller File:
+
+**First, Let's try to understand the Main thing**
+
+	[HttpGet]
+        [Route("api/students")]
+        public HttpResponseMessage AllStudents()
+        {
+            EFSContext db = new EFSContext();
+            var data = db.Students.ToList();
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+	
+**Here in this code we created a Response Message,**
+
+**[HttpGet] = Response when request is Get**
+
+**[Route("api/students")] = After run the project we need to add this "api/students" url on that running url.(Example:https://localhost:44346/api/students)**
+
+**After getting a request AllStudent() will return a response which contains data and a status code.**
+
+## To get all the data from database:
+
+	[HttpGet]
+        [Route("api/students")]
+        public HttpResponseMessage AllStudents()
+        {
+            EFSContext db = new EFSContext();
+            var data = db.Students.ToList();
+            return Request.CreateResponse(HttpStatusCode.OK, data);
+        }
+
+## To get individual data from database:
+
+	[HttpGet]
+        [Route("api/students/{id}")]
+        public HttpResponseMessage GetStudents(int id)
+        {
+            EFSContext db = new EFSContext();
+            var student = db.Students.Find(id);
+            if (student != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, student);
+            }
+            return Request.CreateResponse(HttpStatusCode.NotFound);
+
+        }
+
+## To create data in database:
+
+	[HttpPost]
+        [Route("api/students/add")]
+        public HttpResponseMessage AddStudents(Student st)
+        {
+            try
+            {
+                EFSContext db = new EFSContext();
+                db.Students.Add(st);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch(Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+
+## To update data in database:
+
+	[HttpPost]
+        [Route("api/students/update")]
+        public HttpResponseMessage UpdateStudents(Student st)
+        {
+            EFSContext db = new EFSContext();
+            var student = db.Students.Find(st.Id);
+            if (student != null)
+            {
+                db.Entry(student).CurrentValues.SetValues(st);
+                try
+                {
+                    db.SaveChanges();
+                    return Request.CreateResponse(HttpStatusCode.OK, student);
+                }
+                catch(Exception ex)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest,ex.Message);
+                }
+               
+            }
+            return Request.CreateResponse(HttpStatusCode.NotFound,"User Not Found");
+
+        }
+
+## To delete data from database
+
+	[HttpDelete]
+        [Route("api/studentdelete/{id}")]
+        public HttpResponseMessage DeleteStudents(int id)
+        {
+            EFSContext db = new EFSContext();
+            var student = db.Students.Find(id);
+            if (student != null)
+            {
+                db.Students.Remove(student);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            return Request.CreateResponse(HttpStatusCode.NotFound);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
