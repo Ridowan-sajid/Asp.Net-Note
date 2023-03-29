@@ -959,7 +959,11 @@ It will generate a box where**
 
 
 
+# API
 
+**Application Programming Interface: Api is like a waiter where Customer is assuming Front End and Cheif is assuming Backend.**
+
+**For creating API we need to do something extra stuff**
 
 
 
