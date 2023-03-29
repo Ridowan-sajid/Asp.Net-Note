@@ -892,8 +892,8 @@ It will generate a box where**
 
 **To create authentication annotation:**
 
-**Inside our project we need to create a folder, for better known we may named that folder Auth**
-**For now we want to create two authentication annotation, one for Admin, another for Logged in user**
+**Inside our project we need to create a folder, for better known we may named that folder Auth.**
+**For now we want to create two authentication annotation, one for Admin, another for Logged in user.**
 **Inside Auth folder we created two file, first one is AdminAccess.cs, another one is Logged.cs**
 
 **N:B: Folder name, file name could be anything**
