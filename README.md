@@ -839,12 +839,56 @@ It will generate a box where**
 
 
 
+# Authentication
+
+**Login Controller**
 
 
+	[HttpGet]
+        public ActionResult Login() { 
+            return View();  
+        }
+        [HttpPost]
+        public ActionResult Login(LoginModel login) {
+            if (ModelState.IsValid) {
+                PMSContext db = new PMSContext();
+                var user = (from u in db.Users
+                            where u.Username.Equals(login.Username)
+                            && u.Password.Equals(login.Password)
+                            select u).SingleOrDefault();
+                if (user != null)
+                {
+                    Session["user"] = user;
+                    //var returnUrl = Request["ReturnUrl"];
+                    //if(returnUrl != null)
+                    //{
+                      //  return Redirect(returnUrl);
+                    //}
+                    return RedirectToAction("Index", "Order");
+                }
+                TempData["Msg"] = "Username Password Invalid";
+            }
+            return View(login);
+            
+        }
+
+**Login.cshtml**
+       
+       @{
+           ViewBag.Title = "Login";
+       }
+
+       <h2>Log In</h2>
+       <form method="post">
+           <input name="name" type="text" placeholder="name" />
+           <input name="password" type="text" placeholder="password" />
+           <input name="submit" type="submit" value="Login"/>
+       </form>
 
 
+## Annotation
 
-
+	
 
 
 
