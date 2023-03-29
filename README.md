@@ -841,7 +841,7 @@ It will generate a box where**
 
 # Authentication
 
-**Login Controller**
+**Login Action**
 
 
 	[HttpGet]
@@ -888,7 +888,72 @@ It will generate a box where**
 
 ## Annotation
 
-	
+**We can create our own annotation maybe for authentication purpose**
+
+**To create authentication annotation:**
+
+**Inside our project we need to create a folder, for better known we may named that folder Auth**
+**For now we want to create two authentication annotation, one for Admin, another for Logged in user**
+**Inside Auth folder we created two file, first one is AdminAccess.cs, another one is Logged.cs**
+
+**N:B: Folder name, file name could be anything**
+
+**AdminAccess.cs**
+
+	using EFCodeFirst.EF.Models;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Web;
+	using System.Web.Mvc;
+
+	namespace EFCodeFirst.Auth
+	{
+	    public class AdminAccess:AuthorizeAttribute
+	    {
+		protected override bool AuthorizeCore(HttpContextBase httpContext)
+		{
+		    var user = (User)httpContext.Session["user"];
+		    if(user != null && user.Type.Equals("admin")) return true;
+		    return false;
+		}
+	    }
+	}
+
+
+**Logged.cs**
+
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Web;
+	using System.Web.Mvc;
+
+	namespace EFCodeFirst.Auth
+	{
+	    public class Logged : AuthorizeAttribute
+	    {
+		protected override bool AuthorizeCore(HttpContextBase httpContext)
+		{
+		    if (httpContext.Session["user"] != null) return true;
+		    return false;
+		}
+	    }
+	}
+
+**To use these Annotation we can call them before any our controller Action**
+
+**example**
+
+	[AdminAccess]
+        public ActionResult AllOrders() {
+            var db = new PMSContext();
+            return View(db.Orders.ToList());
+        }
+
+**Ony Admin can see the order list**
+
+
 
 
 
