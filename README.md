@@ -1100,9 +1100,15 @@ It will generate a box where**
 
 
 
-**To check evrery request: Need to install PostMan Api software**
+**To interact with database through api request: Need to install PostMan Api software**
 
+**After Installation:**
 
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/ApiSee1.png)
+
+**Data creation is a little bit tricky**'
+
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/ApiSee2.png)
 
 
 
