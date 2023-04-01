@@ -1106,7 +1106,7 @@ It will generate a box where**
 
 ![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/ApiSee1.png)
 
-**Data creation is a little bit tricky**'
+**Data creation is a little bit tricky**
 
 ![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/ApiSee2.png)
 
