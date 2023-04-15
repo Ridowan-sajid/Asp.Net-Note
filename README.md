@@ -1116,6 +1116,266 @@ It will generate a box where**
 
 
 
+N-tier Architecture as 3-tier Architecture:
+N:B: When we create any model class, we make sure it is public for just now.
+
+Application Layer:
+In this layer user interact with the app. Application layer can be anything. Example: Desktop app, android app.
+
+Business Logic Layer:
+In this layer decision making or logical operation are being implemented. Example: More than 20 students can't take Biology.
+
+Data Access Layer:
+In this layer we access data from database.
+
+
+Application Layer:
+Till now we created application Layer.
+
+Now we have to connect Application Layer to Business Logic Layer , then Business Logic Layer to Data Access Layer.
+
+Now we have to install EntityFramework in DAL and Application Layer. In DAL we will create A folder Call Model. In this folder We will create table as a class like the older way.
+And also don't forget to create a Context class inside DAL.
+After this we need to create a < connectionStrings /> inside web.config which is in Application Layer.
+
+In here we will run those command(enable-migrations, add-migraration etc).
+Next we have to create a Repo class inside a Repo folder. Repo class is created to connect our Model class with database.
+
+///Layer 11 img
+
+Inside EmplyeeRepo.cs:
+
+using DAL.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DAL.Repos
+{
+    public class EmployeeRepo
+    {
+        static EmpContext db;
+        static EmployeeRepo() { 
+            db = new EmpContext();
+        }
+        public static List<Employee> Get() {
+             return db.Employees.ToList();
+        }
+        public static Employee Get(int id) {
+            return db.Employees.Find(id);
+        }
+        public static bool Create(Employee emp) {
+            db.Employees.Add(emp);
+            return db.SaveChanges() > 0;
+        }
+
+        public static bool Update(Employee emp) {
+            var exempp = Get(emp.Id);
+            db.Entry(exempp).CurrentValues.SetValues(emp);
+            return db.SaveChanges() > 0;
+        }
+        public static bool Delete(int id) {
+            var exemp = Get(id);
+            db.Employees.Remove(exemp);
+            return db.SaveChanges() > 0;
+        }
+
+    }
+}
+
+
+In this same we can create CourseRepo.cs.
+In DAL our work has been done. Next we have to work on BLL.
+
+BLL:
+///Layer 11 img
+Inside BLL we have to create 2 folder which are called:
+1. Services
+2. DTOs
+
+DTOs are as same as Model class. DTOs class are being created inside DTOs folder.
+
+Inside DTOs EmployeeDTOs.cs
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BLL.DTOs
+{
+    public class EmployeeDTO
+    {
+        [Required]
+        public int Id { get; set; }
+        [Required]
+        public string Name { get; set; }
+    }
+
+}
+
+
+When we call a method from DAL our BLL won't recognise that method return type, which is a class. To solve this problem we create DTO's. When we call a method from DAL we got an object which can't be recognized by BLL. So we just convert that object into DTOs class(before we say that DTOs and Model class are same and DTOs are belongs to BLL and Model class are belongs to DAL). If we required to send a data to DAL we just convert that DTOs class object into Model class object. 
+
+Services:
+Insert data, get data etc are being done through Services. Services are like bridge between DAL and BLL.
+
+
+Inside Services EmployeeServices.cs
+
+
+using BLL.DTOs;
+using DAL;
+using DAL.Models;
+using DAL.Repos;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BLL.Services
+{
+    public class EmployeeService
+    {
+        public static List<EmployeeDTO> Get() { 
+            var data= EmployeeRepo.Get();
+            return Convert(data);
+
+        }
+        public static List<EmployeeDTO> Get10() {
+            var emps = EmployeeRepo.Get();  
+            var data = from e in emps
+                       where e.Id < 11
+                       select e;
+            return Convert(data.ToList());
+        }
+        public static EmployeeDTO Get(int id) { 
+            return Convert(EmployeeRepo.Get(id));
+        }
+        public static bool Create(EmployeeDTO employee) {
+            var data = Convert(employee);
+            return EmployeeRepo.Create(data);
+        }
+        public static bool Update(EmployeeDTO employee) {
+            var data = Convert(employee);
+            return EmployeeRepo.Update(data);
+        }
+        public static bool Delete(int id) {
+            return EmployeeRepo.Delete(id);
+        }
+
+        static List<EmployeeDTO> Convert(List<Employee> employees) {
+            var data = new List<EmployeeDTO>();
+            foreach (Employee employee in employees) {
+                data.Add(Convert(employee));
+            }
+            return data;
+        }
+        static EmployeeDTO Convert(Employee employee) {
+            return new EmployeeDTO()
+            {
+                Id = employee.Id,
+                Name = employee.Name
+            };
+        }
+        static Employee Convert(EmployeeDTO employee) {
+            return new Employee()
+            {
+                Id = employee.Id,
+                Name = employee.Name
+            };
+        }
+    }
+}
+
+
+
+
+Application Layer:
+We are assuming this layer as API.
+Inside Controller we create EmpController as Controller.
+
+EmpController.cs
+
+using BLL.DTOs;
+using BLL.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
+
+namespace APIAppLayer.Controllers
+{
+    public class EmpController : ApiController
+    {
+        [HttpGet]
+        [Route("api/employees")]
+        public HttpResponseMessage AllEmployees()
+        {
+            try
+            {
+                var data = EmployeeService.Get();
+                return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (Exception ex) { 
+                return Request.CreateResponse(HttpStatusCode.BadRequest,ex.Message);
+            }
+        }
+        [HttpGet]
+        [Route("api/employees/{id}")]
+        public HttpResponseMessage Get(int id)
+        {
+            try {
+                var data = EmployeeService.Get(id);
+                return Request.CreateResponse(HttpStatusCode.OK, data);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("api/employees/add")]
+        public HttpResponseMessage Add(EmployeeDTO emp)
+        {
+            try {
+                var res = EmployeeService.Create(emp);
+                return Request.CreateResponse(HttpStatusCode.OK, res);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+        }
+        
+    }
+}
+
+
+with this controller we communicate with BLL. Application layer dunno anything about DAL it's only know about BLL. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
 
 
 
