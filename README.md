@@ -1403,7 +1403,7 @@ Inside Controller we create EmpController as Controller.**
 
 
 
-
+**Now simply run these on Postman Api or any way you want**
 
 
 
