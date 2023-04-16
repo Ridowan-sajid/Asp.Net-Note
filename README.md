@@ -1116,23 +1116,39 @@ It will generate a box where**
 
 
 
-N-tier Architecture as 3-tier Architecture:
-N:B: When we create any model class, we make sure it is public for just now.
+# N-tier Architecture as 3-tier Architecture:
 
-Application Layer:
-In this layer user interact with the app. Application layer can be anything. Example: Desktop app, android app.
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Layer-1.png)
 
-Business Logic Layer:
-In this layer decision making or logical operation are being implemented. Example: More than 20 students can't take Biology.
+**N:B: When we create any model class, we make sure it is public just for now. Later we will make it internal**
 
-Data Access Layer:
-In this layer we access data from database.
+**Application Layer:**
+**In this layer user interact with the app. Application layer can be anything. Example: Desktop app, android app.**
 
+**Business Logic Layer:**
+**In this layer decision making or logical operation are being implemented. Example: More than 20 students can't take Biology.**
 
-Application Layer:
-Till now we created application Layer.
+**Data Access Layer:**
+**In this layer we access data from database.**
 
-Now we have to connect Application Layer to Business Logic Layer , then Business Logic Layer to Data Access Layer.
+## Step:
+
+**Till now we created application Layer. Application layer can be api, mvc, mobile app, etc. It could be anything.**
+
+**So now we have to create DAL and BLL**
+**To do these just follow the screenshot given below:**
+
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Layer-2.png)
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Layer-3.png)
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Layer-4.png)
+
+**Same way we will create DAL**
+
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Layer-5.png)
+
+**We peacefully created 3 layer**
+
+**Now we have to connect Application Layer to Business Logic Layer , then Business Logic Layer to Data Access Layer.**
 
 Now we have to install EntityFramework in DAL and Application Layer. In DAL we will create A folder Call Model. In this folder We will create table as a class like the older way.
 And also don't forget to create a Context class inside DAL.
