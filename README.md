@@ -591,7 +591,7 @@ It will generate a box where**
 * **data source= server name(my server name is fragile)**
 * **initial catalog= Database name which I will use in this project,if there is no database as ECommerce it will create it's own.**
 * **integrated security= To active windows authentication.**
-* **If votey kilai,,,userid="";password="";**
+* **If you have to use ur database by logged in,,,User Id="";Password=""; instead of connectionString="data source=FRAGILE;**
 
 ![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/CodeFirst1.png)
 
