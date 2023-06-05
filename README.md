@@ -1324,46 +1324,58 @@ That means database creation depends on both DAL and application Layer.**
 * 1. Services
 * 2. DTOs
 
-![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Layer-12.png)
+# img-16
 
 **DTOs are as same as Model class. DTOs class are being created inside DTOs folder.**
 
-**Inside DTOs EmployeeDTOs.cs**
+**Inside DTOs CommentDTOs.cs**
 
+	using DAL.Models;
 	using System;
 	using System.Collections.Generic;
 	using System.ComponentModel.DataAnnotations;
+	using System.ComponentModel.DataAnnotations.Schema;
 	using System.Linq;
 	using System.Text;
 	using System.Threading.Tasks;
 
 	namespace BLL.DTOs
 	{
-	    public class EmployeeDTO
+	    public class CommentDTO
 	    {
-		[Required]
+		[Key]
 		public int Id { get; set; }
 		[Required]
-		public string Name { get; set; }
-	    }
+		public string Text { get; set; }
+		[Required]
+		public DateTime Date { get; set; }
 
+		public int UserId { get; set; }
+
+		public int PostId { get; set; }
+
+
+	    }
 	}
 
 
+
 **When we call a method from DAL our BLL couldn't able to recognise that method return type, which is a class. To solve this problem we create DTO's. When we call a method from DAL we got an object which can't be recognized by BLL. So we just convert that object into DTOs class(before we say that DTOs and Model class are same and DTOs are belongs to BLL and Model class are belongs to DAL). If we required to send a data to DAL we just convert that DTOs class object into Model class object.**
+
+**To convert DTOs to model or model to DTOs there is a package called Automapper. We can download this Automapper package by the help of Nuget Manager. We have to download Automapper in BLL.**
 
 **Services:**
 
 **Insert data, get data etc are being done through Services. Services are like bridge between DAL and BLL.**
 
 
-**Inside Services EmployeeServices.cs**
+**Inside Services CommentServices.cs**
 
 
+	using AutoMapper;
 	using BLL.DTOs;
 	using DAL;
 	using DAL.Models;
-	using DAL.Repos;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -1372,58 +1384,128 @@ That means database creation depends on both DAL and application Layer.**
 
 	namespace BLL.Services
 	{
-	    public class EmployeeService
+	    public class CommentServices
 	    {
-		public static List<EmployeeDTO> Get() { 
-		    var data= EmployeeRepo.Get();
-		    return Convert(data);
+		public static List<CommentDTO> Get()
+		{
+		    var data = DataAccessFactory.CommentData().Get();
+		    var cfg = new MapperConfiguration(c=>
+		    {
+			c.CreateMap<Comment, CommentDTO>();
+		    });
+		    var mapper = new Mapper(cfg);
+		    var mapped = mapper.Map<List<CommentDTO>>(data);
 
-		}
-		public static List<EmployeeDTO> Get10() {
-		    var emps = EmployeeRepo.Get();  
-		    var data = from e in emps
-			       where e.Id < 11
-			       select e;
-		    return Convert(data.ToList());
-		}
-		public static EmployeeDTO Get(int id) { 
-		    return Convert(EmployeeRepo.Get(id));
-		}
-		public static bool Create(EmployeeDTO employee) {
-		    var data = Convert(employee);
-		    return EmployeeRepo.Create(data);
-		}
-		public static bool Update(EmployeeDTO employee) {
-		    var data = Convert(employee);
-		    return EmployeeRepo.Update(data);
-		}
-		public static bool Delete(int id) {
-		    return EmployeeRepo.Delete(id);
+		    return mapped;
+		    /*return Convert(data);*/
 		}
 
-		static List<EmployeeDTO> Convert(List<Employee> employees) {
-		    var data = new List<EmployeeDTO>();
-		    foreach (Employee employee in employees) {
-			data.Add(Convert(employee));
+		public static CommentDTO Get(int id)
+		{
+		    var data = DataAccessFactory.CommentData().Get(id);
+
+		    var cfg = new MapperConfiguration(c =>
+		    {
+			c.CreateMap<Comment, CommentDTO>();
+		    });
+		    var mapper = new Mapper(cfg);
+		    var mapped = mapper.Map<CommentDTO>(data);
+
+		    return mapped; 
+
+
+		}
+
+		public static bool Create(CommentDTO member)
+		{
+		    var cfg = new MapperConfiguration(c =>
+		    {
+			c.CreateMap<CommentDTO, Comment>();
+		    });
+		    var mapper = new Mapper(cfg);
+		    var mapped = mapper.Map<Comment>(member);
+
+		    /*var data = Convert(member);*/
+		    return DataAccessFactory.CommentData().Insert(mapped);
+		}
+
+		public static bool Update(CommentDTO member)
+		{
+		    var cfg = new MapperConfiguration(c =>
+		    {
+			c.CreateMap<CommentDTO, Comment>();
+		    });
+		    var mapper = new Mapper(cfg);
+		    var mapped = mapper.Map<Comment>(member);
+		    /*var data = Convert(member);*/
+		    return DataAccessFactory.CommentData().Update(mapped);
+		}
+
+		public static bool Delete(int id)
+		{
+		    return DataAccessFactory.CommentData().Delete(id);
+		}
+
+
+	       /* static List<CommentDTO> Convert(List<Comment> comment)
+		{
+		    var data = new List<CommentDTO>();
+		    foreach (var cm in comment)
+		    {
+			data.Add(new CommentDTO()
+			{
+			    Id = cm.Id,
+			    Text = cm.Text,
+			    Date = cm.Date,
+			    UserId = (int)cm.UserId,
+			    *//*Student=cm.Student,*/
+			    /*TeacherId= (int)cm.TeacherId,*/
+			    /* Teacher=cm.Teacher,*//*
+			    PostId = (int)cm.PostId,
+			    *//*Post=cm.Post*//*
+
+			});
 		    }
+
 		    return data;
 		}
-		static EmployeeDTO Convert(Employee employee) {
-		    return new EmployeeDTO()
+
+		static CommentDTO Convert(Comment cm)
+		{
+		    return new CommentDTO()
 		    {
-			Id = employee.Id,
-			Name = employee.Name
+			Id = cm.Id,
+			Text = cm.Text,
+			Date = cm.Date,
+			UserId = (int)cm.UserId,
+			*//*Student = cm.Student,*/
+		       /* TeacherId = (int)cm.TeacherId,*/
+		       /* Teacher = cm.Teacher,*//*
+			PostId = (int)cm.PostId,
+			*//*Post = cm.Post*//*
 		    };
 		}
-		static Employee Convert(EmployeeDTO employee) {
-		    return new Employee()
+
+		static Comment Convert(CommentDTO cm)
+		{
+		    return new Comment()
 		    {
-			Id = employee.Id,
-			Name = employee.Name
+			Id = cm.Id,
+			Text = cm.Text,
+			Date = cm.Date,
+			UserId = cm.UserId,
+			*//*Student = cm.Student,*/
+			/*TeacherId = cm.TeacherId,*/
+			/*Teacher = cm.Teacher,*//*
+			PostId = cm.PostId,
+			*//*Post = cm.Post*//*
 		    };
-		}
+		}*/
+
+
 	    }
 	}
+
 
 
 
