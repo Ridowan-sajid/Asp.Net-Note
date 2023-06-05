@@ -1123,7 +1123,7 @@ It will generate a box where**
 **N:B: When we create any model class, we make sure it is public just for now. Later we will make it internal**
 
 **Application Layer:**
-**In this layer user interact with the app. Application layer can be anything. Example: Desktop app, android app.**
+**In this layer user interact with the app. Application layer can be connected to anything. Example: Desktop app, android app.**
 
 **Business Logic Layer:**
 **In this layer decision making or logical operation are being implemented. Example: More than 20 students can't take Biology.**
@@ -1133,7 +1133,7 @@ It will generate a box where**
 
 ## Step:
 
-**Till now we created application Layer. Application layer can be api, mvc, mobile app, etc. It could be anything.**
+**Till now we created application Layer. Application layer can be connected with mobile app, etc. It could be anything.**
 
 **So now we have to create DAL and BLL**
 **To do these just follow the screenshot given below:**
@@ -1173,6 +1173,41 @@ That means database creation depends on both DAL and application Layer.**
 ![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Layer-10.png)
 
 **In here we will run those command(enable-migrations, add-migraration etc) Like the older way.**
+
+# img-13
+
+**Next we have to create a folder called Interfaces. Inside Interfaces we have to create IRepo.cs**
+
+**IRepo.cs**
+
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Text;
+	using System.Threading.Tasks;
+
+	namespace DAL.Interfaces
+	{
+	    public interface IRepo<TYPE,ID,RET>
+	    {
+		List<TYPE> Get();
+		TYPE Get(ID id);
+		RET Insert(TYPE obj);
+		RET Update(TYPE obj);
+		bool Delete(ID id);
+	    }
+	}
+
+**IRepo.cs is an interface which contains the main structure of all of the repos**
+**All the repos will inherit this IRepo if there function matched with IRepo. Otherwise for different repo with different function wh have to create different interfaces.**
+
+
+
+
+
+
+
+
 
 **Next we have to create a Repo class inside a Repo folder. Repo class is created to interact our Model class with database.**
 
