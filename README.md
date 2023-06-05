@@ -1174,9 +1174,11 @@ That means database creation depends on both DAL and application Layer.**
 
 **In here we will run those command(enable-migrations, add-migraration etc) Like the older way.**
 
-# img-13
+## DAL
 
-**Next we have to create a folder called Interfaces. Inside Interfaces we have to create IRepo.cs**
+**Next we have to create a folder called Interfaces. Inside Interfaces we have to create IRepo.cs. (What is Repo? Repo: Repo is a folder which contains the model class file, These file will comunicate with databases.)**
+
+# img-13
 
 **IRepo.cs**
 
@@ -1199,23 +1201,17 @@ That means database creation depends on both DAL and application Layer.**
 	}
 
 **IRepo.cs is an interface which contains the main structure of all of the repos**
-**All the repos will inherit this IRepo if there function matched with IRepo. Otherwise for different repo with different function wh have to create different interfaces.**
+**All the repos will inherit this IRepo if there function matched with IRepo. Otherwise for different repo with different function, we have to create different interfaces.**
 
+# img-14
 
+**Next we have to create our desire Repo class inside a Repo folder. Repo class is created to interact our Model class with database.**
+**To not create multiple time object of a database, we can create a class called Repo which contains the the creation of object of database, then all other repo will inherit this Repo class. So then we won't need to create object of database in every repo class.**
 
+**Procedure is given below:**
 
+**Repo.cs**
 
-
-
-
-
-**Next we have to create a Repo class inside a Repo folder. Repo class is created to interact our Model class with database.**
-
-![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Layer-11.png)
-
-**Inside EmplyeeRepo.cs:**
-
-	using DAL.Models;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
@@ -1224,39 +1220,100 @@ That means database creation depends on both DAL and application Layer.**
 
 	namespace DAL.Repos
 	{
-	    public class EmployeeRepo
+	    internal class Repo
 	    {
-		static EmpContext db;
-		static EmployeeRepo() { 
-		    db = new EmpContext();
+		internal LABContext db;
+		internal Repo()
+		{
+		    db = new LABContext();
 		}
-		public static List<Employee> Get() {
-		     return db.Employees.ToList();
-		}
-		public static Employee Get(int id) {
-		    return db.Employees.Find(id);
-		}
-		public static bool Create(Employee emp) {
-		    db.Employees.Add(emp);
+	    }
+	}
+
+
+**MemberRepo.cs:**
+
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Text;
+	using System.Threading.Tasks;
+	using DAL.Interfaces;
+	using DAL.Models;
+
+	namespace DAL.Repos
+	{
+	    internal class MemberRepo : Repo, IRepo<Member, int, bool>
+	    {
+		public bool Delete(int id)
+		{
+		    var data = db.Members.Find(id);
+		    db.Members.Remove(data);
 		    return db.SaveChanges() > 0;
 		}
 
-		public static bool Update(Employee emp) {
-		    var exempp = Get(emp.Id);
-		    db.Entry(exempp).CurrentValues.SetValues(emp);
+		public List<Member> Get()
+		{
+		    return db.Members.ToList();
+		}
+
+		public Member Get(int id)
+		{
+		    return db.Members.Find(id);
+		}
+
+		public bool Insert(Member obj)
+		{
+		    db.Members.Add(obj);
 		    return db.SaveChanges() > 0;
 		}
-		public static bool Delete(int id) {
-		    var exemp = Get(id);
-		    db.Employees.Remove(exemp);
-		    return db.SaveChanges() > 0;
+
+		public bool Update(Member obj)
+		{
+		    var data = db.Members.Find(obj.Id);
+		    db.Entry(data).CurrentValues.SetValues(obj);
+		    return db.SaveChanges()>0;
 		}
 
 	    }
 	}
 
 
-**In this same we can create CourseRepo.cs.**
+
+**In the same we can create as many repo as we want.**
+
+**Next we have to create a DataAccessFactory class inside DAL(Not any other folder). So that BLL can communicate with DAL through this DataAccessFactory.cs**
+
+# img-15
+
+**DataAccessFactory.cs**
+
+	using DAL.Interfaces;
+	using DAL.Models;
+	using DAL.Repos;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Text;
+	using System.Threading.Tasks;
+
+	namespace DAL
+	{
+	    public class DataAccessFactory
+	    {
+		public static IRepo<Member, int, bool> MemberData()
+		{
+		    return new MemberRepo();
+		}
+		public static IRepo<Project, int, bool> ProjectData()
+		{
+		    return new ProjectRepo();
+		}
+	    }
+	}
+
+
+
 
 **In DAL our work has been done. Next we have to work on BLL.**
 
