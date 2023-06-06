@@ -1513,69 +1513,120 @@ That means database creation depends on both DAL and application Layer.**
 ## Application Layer:
 
 **We are assuming this layer as API.
-Inside Controller we create EmpController as Controller.**
+Inside Controller we create CommentController as Controller.**
 
-**EmpController.cs**
+**CommentController.cs**
 
 	using BLL.DTOs;
 	using BLL.Services;
+	using OnlineAcademy.Auth;
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
 	using System.Net;
 	using System.Net.Http;
 	using System.Web.Http;
+	using System.Web.Http.Cors;
 
-	namespace APIAppLayer.Controllers
+	namespace OnlineAcademy.Controllers
 	{
-	    public class EmpController : ApiController
+	    [EnableCors("*","*","*")]  /* just enabling CORS */ 
+	    [Logged]
+	    public class CommentController : ApiController
 	    {
+
 		[HttpGet]
-		[Route("api/employees")]
-		public HttpResponseMessage AllEmployees()
+		[Route("api/comments")]
+		public HttpResponseMessage Get()
 		{
 		    try
 		    {
-			var data = EmployeeService.Get();
-			return Request.CreateResponse(HttpStatusCode.OK, data);
-		    }
-		    catch (Exception ex) { 
-			return Request.CreateResponse(HttpStatusCode.BadRequest,ex.Message);
-		    }
-		}
-		[HttpGet]
-		[Route("api/employees/{id}")]
-		public HttpResponseMessage Get(int id)
-		{
-		    try {
-			var data = EmployeeService.Get(id);
+			var data = CommentServices.Get();
 			return Request.CreateResponse(HttpStatusCode.OK, data);
 		    }
 		    catch (Exception ex)
 		    {
+
 			return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+
 		    }
 		}
-		[HttpPost]
-		[Route("api/employees/add")]
-		public HttpResponseMessage Add(EmployeeDTO emp)
+
+		[HttpGet]
+		[Route("api/comments/{id:int}")]
+		public HttpResponseMessage GetM(int id)
 		{
-		    try {
-			var res = EmployeeService.Create(emp);
+		    try
+		    {
+			var data = CommentServices.Get(id);
+			return Request.CreateResponse(HttpStatusCode.OK, data);
+		    }
+		    catch (Exception ex)
+		    {
+
+			return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+
+		    }
+		}
+
+
+		[HttpPost]
+		[Route("api/comments/add")]
+		public HttpResponseMessage AddMembers(CommentDTO comment)
+		{
+		    try
+		    {
+			var res = CommentServices.Create(comment);
 			return Request.CreateResponse(HttpStatusCode.OK, res);
 		    }
 		    catch (Exception ex)
 		    {
-			return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+			Console.WriteLine(ex.InnerException.Message);
+			return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.InnerException.InnerException.Message);
+
 		    }
 		}
 
+
+		[HttpPost]
+		[Route("api/comments/update")]
+		public HttpResponseMessage UpdateMembers(CommentDTO comment)
+		{
+		    try
+		    {
+			var res = CommentServices.Update(comment);
+			return Request.CreateResponse(HttpStatusCode.OK, res);
+		    }
+		    catch (Exception ex)
+		    {
+			return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.InnerException.InnerException.Message);
+		    }
+		}
+
+
+		[HttpDelete]
+		[Route("api/comments/delete/{id:int}")]
+		public HttpResponseMessage DeleteMembers(int id)
+		{
+		    try
+		    {
+			var res = CommentServices.Delete(id);
+			return Request.CreateResponse(HttpStatusCode.OK, res);
+		    }
+		    catch (Exception ex)
+		    {
+			return Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message);
+		    }
+
+		}
 	    }
 	}
 
+# img-16
+
 **With this controller we communicate with BLL. Application layer dunno anything about DAL it's only know about BLL. BLL know DAL, and it catches data from DAL**
 
-
+**We can set some authentication. Example: only logged in user can use this api or only admin can use this api etc.**
 
 **Now simply run these on Postman Api or any way you want**
 
