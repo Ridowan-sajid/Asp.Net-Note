@@ -1362,7 +1362,7 @@ That means database creation depends on both DAL and application Layer.**
 
 **When we call a method from DAL our BLL couldn't able to recognise that method return type, which is a class. To solve this problem we create DTO's. When we call a method from DAL we got an object which can't be recognized by BLL. So we just convert that object into DTOs class(before we say that DTOs and Model class are same and DTOs are belongs to BLL and Model class are belongs to DAL). If we required to send a data to DAL we just convert that DTOs class object into Model class object.**
 
-**To convert DTOs to model or model to DTOs there is a package called Automapper. We can download this Automapper package by the help of Nuget Manager. We have to download Automapper in BLL.**
+**To convert DTOs to model or model to DTOs there is a package called Automapper. We can download this Automapper(version: 10.0.0) package by the help of Nuget Manager. We have to download Automapper in BLL.**
 
 **Services:**
 
