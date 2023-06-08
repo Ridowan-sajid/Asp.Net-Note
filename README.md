@@ -1178,7 +1178,7 @@ That means database creation depends on both DAL and application Layer.**
 
 **Next we have to create a folder called Interfaces. Inside Interfaces we have to create IRepo.cs. (What is Repo? Repo: Repo is a folder which contains the model class file, These file will comunicate with databases.)**
 
-# img-13
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Layer-13.png)
 
 **IRepo.cs**
 
@@ -1203,7 +1203,7 @@ That means database creation depends on both DAL and application Layer.**
 **IRepo.cs is an interface which contains the main structure of all of the repos**
 **All the repos will inherit this IRepo if there function matched with IRepo. Otherwise for different repo with different function, we have to create different interfaces.**
 
-# img-14
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Layer-14.png)
 
 **Next we have to create our desire Repo class inside a Repo folder. Repo class is created to interact our Model class with database.**
 **To not create multiple time object of a database, we can create a class called Repo which contains the the creation of object of database, then all other repo will inherit this Repo class. So then we won't need to create object of database in every repo class.**
@@ -1284,7 +1284,7 @@ That means database creation depends on both DAL and application Layer.**
 
 **Next we have to create a DataAccessFactory class inside DAL(Not any other folder). So that BLL can communicate with DAL through this DataAccessFactory.cs**
 
-# img-15
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Layer-15.png)
 
 **DataAccessFactory.cs**
 
@@ -1324,7 +1324,7 @@ That means database creation depends on both DAL and application Layer.**
 * 1. Services
 * 2. DTOs
 
-# img-16
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Layer-16.png)
 
 **DTOs are as same as Model class. DTOs class are being created inside DTOs folder.**
 
@@ -1622,7 +1622,7 @@ Inside Controller we create CommentController as Controller.**
 	    }
 	}
 
-# img-16
+![](https://github.com/Ridowan-sajid/Asp.Net-Note/blob/main/images/Layer-17.png)
 
 **With this controller we communicate with BLL. Application layer dunno anything about DAL it's only know about BLL. BLL know DAL, and it catches data from DAL**
 
