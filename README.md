@@ -1631,6 +1631,11 @@ Inside Controller we create CommentController as Controller.**
 **Now simply run these on Postman Api or any way you want**
 
 
+# SOLID architechture
+
+<h4><a href="https://www.digitalocean.com/community/conceptual-articles/s-o-l-i-d-the-first-five-principles-of-object-oriented-design">Visit this link to know everything about SOLID architechture</a></h4>
+
+
 
 
 
